@@ -4,6 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
+const userRoute = require("./routes/user");
 
 //MONGO DB CONNECTIONS
 mongoose
@@ -16,6 +17,12 @@ app.use(cors());
 
 //LOGGER
 app.use(logger("combined"));
+
+//JSON BODYPARSE
+app.use(express.json());
+
+//ROUTES
+app.use("/api/users", userRoute);
 
 //APP INITIALIZATION
 app.listen(process.env.PORT || 3000, () => {
